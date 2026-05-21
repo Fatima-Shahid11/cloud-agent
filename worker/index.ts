@@ -7,7 +7,7 @@ import { redis, keys } from "../lib/redis";
 import { CHAT_QUEUE_NAME, ChatJobData } from "../lib/queue";
 import { loadConversation, appendMessage } from "../lib/memory";      
 
-// ---- The web search tool (SerpAPI) ----
+// ---- The web search tool (tavily) ----
 // The LLM can decide to call this when it needs fresh/current info.
 const webSearch = tool({
   description:
