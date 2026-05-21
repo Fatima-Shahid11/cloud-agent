@@ -84,15 +84,20 @@ export default function Home() {
   }
 
   return (
-    <main style={{ maxWidth: 640, margin: "40px auto", fontFamily: "sans-serif" }}>
+    <main style={{ width: 600, margin: "40px auto", fontFamily: "sans-serif" }}>
       <h1 style={{ fontSize: 18 }}>Cloud Agent</h1>
+      <br></br>
 
-      <div style={{ border: "1px solid #ccc", padding: 12, minHeight: 300, marginBottom: 12 }}>
+      <div style={{
+        width: 600, boxSizing: "border-box",
+        border: "1px solid #ccc", padding: 12, height: 400,
+        overflowY: "auto", marginBottom: 12,
+      }}>
         {messages.map((m, i) => {
           const isLastAssistant = i === messages.length - 1 && m.role === "assistant";
           const showLoading = isLastAssistant && streaming && m.content === "";
           return (
-            <div key={i} style={{ margin: "8px 0" }}>
+            <div key={i} style={{ margin: "8px 0", wordBreak: "break-word" }}>
               <b>{m.role === "user" ? "You" : "Assistant"}:</b>{" "}
               {showLoading ? <TypingDots /> : m.content}
             </div>
@@ -100,7 +105,7 @@ export default function Home() {
         })}
       </div>
 
-      <div style={{ display: "flex", gap: 8 }}>
+      <div style={{ display: "flex", gap: 8, width: 600, boxSizing: "border-box" }}>
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
