@@ -37,7 +37,7 @@ Redis runs in local Docker (not Upstash).
 
 ## Why the agent runs in a worker
 
-The LLM call lives in a separate worker process, not the API route, so generation is decoupled from the browser connection. If the agent ran inside the API route, closing the tab would kill the request and the half finished response would be lost. By running it in a worker that writes every token into a Redis stream, the work continues regardless of whether any browser is connected, and the response is durable. The API route is just a dumb pipe that replays the Redis stream from the beginning on each connection, so a client can disconnect mid stream and reconnect later to resume exactly where things stand. This is what makes the agent cloud based rather than tied to one HTTP request.
+The LLM runs in the worker, not the API route, so generation is not tied to the browser connection. If it ran in the API route, closing the tab would kill the request and lose the half finished reply. Because the worker writes every token into a Redis stream instead, the work continues even with no browser connected, and the API route just replays that stream on each connection, which lets a client reconnect mid stream and resume.
 
 ## Setup
 
